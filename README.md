@@ -23,6 +23,10 @@
 
 ### 1. 技术选型与架构设计
 
+**为什么选择这些技术栈？**
+- **Next.js**: 作为一个强大的全栈框架，Next.js 让实现“前后端 All-in-one”变得非常容易。我可以在同一个项目中无缝定义前端交互 UI 和后端 API 路由，极其适合快速构建完整的 Agent 应用。
+- **Vercel AI SDK**: 这是一个专为 Web 构建的 AI 库。它提供了开箱即用的 React Hooks（如 `useChat`），完美封装了流式输出（Streaming）和复杂的工具调用（Tool Calling）状态管理，让前端与 LLM 的交互开发变得异常简单。
+
 在确定使用 Next.js + Vercel AI SDK + Google Gemini 的技术栈后，我使用 Kimi Code 的 Plan Mode 帮助设计了[项目架构](./architecture.md)。这包括：
 
 - 目录结构设计
@@ -82,7 +86,7 @@
 
 **现象**：
 - Kimi 生成的代码使用旧版 API：`useChat` 返回 `handleSubmit`、`isLoading`、`messages` 等
-- 实际安装的 `@ai-sdk/react` v3+ 使用新 API：需要 `sendMessage`、`status`、`DefaultChatTransport`
+- 实际安装的 `@ai-sdk/react` v3+ (AI SDK v6+) 使用新 API：需要 `sendMessage`、`status`、`DefaultChatTransport`
 
 **解决方案**：
 - 查阅官方文档确认最新用法
@@ -99,12 +103,6 @@
 - 通过 console.log 打印实际数据结构
 - 参考文档中的 UIPart 类型定义
 - 重构 message.tsx 中的解析逻辑
-
-### 问题 3: Lucide React 图标不存在
-
-**现象**：AI 使用了 `Tool` 图标，但 lucide-react 中没有这个导出
-
-**解决方案**：替换为 `Wrench` 图标
 
 ---
 
@@ -150,13 +148,13 @@ pnpm dev
 
 ### ✅ 加分功能
 
-| 功能                          | 实现                                       | 截图                                                      |
-| ----------------------------- | ------------------------------------------ | --------------------------------------------------------- |
-| **Loading 状态**              | 显示 "Agent is thinking..." 和加载动画     | ![Loading](./docs/image-3.png)                            |
-| **错误处理**                  | 显示错误信息并提供重试按钮                 | ![Error1](./docs/image.png) ![Error2](./docs/image-1.png) |
-| **历史记录展示**              | 保存并显示当前会话的所有消息（可滚动）     | ![History](./docs/image-4.png)                            |
-| **结构化展示 Agent 中间信息** | 显示 tool call 的参数和结果                | ![Tool Call](./docs/image-2.png)                          |
-| **真实 LLM API + Tool Call**  | Google Gemini + Google Search/Weather 工具 | -                                                         |
+| 功能                          | 实现                                            | 截图                                                      |
+| ----------------------------- | ----------------------------------------------- | --------------------------------------------------------- |
+| **Loading 状态**              | 显示 "Agent is thinking..." 和加载动画          | ![Loading](./docs/image-3.png)                            |
+| **错误处理**                  | 显示错误信息并提供重试按钮                      | ![Error1](./docs/image.png) ![Error2](./docs/image-1.png) |
+| **历史记录展示**              | 保存并显示当前会话的所有消息（可滚动）          | ![History](./docs/image-4.png)                            |
+| **结构化展示 Agent 中间信息** | 显示 tool call 的参数和结果                     | ![Tool Call](./docs/image-2.png)                          |
+| **真实 LLM API + Tool Call**  | Google Gemini + Google Search/Mock Weather 工具 | -                                                         |
 
 ### 支持的 Tools
 
