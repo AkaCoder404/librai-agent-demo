@@ -17,8 +17,6 @@
 | **Kimi 2.5** (通过 VS Code 扩展 [Kimi Code](https://marketplace.visualstudio.com/items?itemName=moonshot-ai.kimi-code)) | 项目架构设计、组件实现、问题调试   |
 | **Gemini CLI** (gemini-3.0+的模型)                                                                                      | AI SDK 最新用法的实现、UI 细节优化 |
 
-![AI Tools](./docs/image-5.png)
-
 ---
 
 ## 你如何使用 AI 工具完成这个任务
