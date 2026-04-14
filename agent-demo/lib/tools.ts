@@ -14,3 +14,13 @@ export const getWeather = tool({
     };
   },
 });
+
+export const getCurrentTime = tool({
+  description: "Get the current time",
+  inputSchema: z.object({}),
+  execute: async () => {
+    return {
+      currentTime: new Date().toLocaleTimeString(),
+    };
+  },
+});

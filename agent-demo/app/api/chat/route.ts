@@ -8,8 +8,11 @@ import {
   LanguageModelResponseMetadata,
   AssistantModelMessage,
   ToolModelMessage,
+  createUIMessageStreamResponse,
+  tool,
 } from "ai";
-import { getWeather } from "@/lib/tools";
+import { getCurrentTime, getWeather } from "@/lib/tools";
+import { z } from "zod";
 
 type ResponseMessage = AssistantModelMessage | ToolModelMessage;
 
@@ -21,7 +24,6 @@ export async function POST(req: Request) {
   const modelMessages = await convertToModelMessages(messages);
 
   const result = streamText({
-    // model: google("gemini-3.1-flash-lite-preview"),
     model: google("gemini-3.1-pro-preview"),
     providerOptions: {
       google: {
@@ -38,8 +40,13 @@ export async function POST(req: Request) {
     stopWhen: stepCountIs(5),
 
     tools: {
+      getCurrentTime,
       getWeather,
       searchGoogle: google.tools.googleSearch({}),
+      // 如果需要multi-agent 协作，可以在这里注册更多工具，例如：
+      // callAnotherAgent: async (input) => {
+      //    这里可以调用另一个agent的API，传入input并返回结果或直接anotherAgent.generateText(input)的结果
+      // }
     },
     onFinish: async ({
       usage,
